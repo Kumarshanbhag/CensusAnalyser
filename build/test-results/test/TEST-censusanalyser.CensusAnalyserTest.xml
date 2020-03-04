@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-03-04T05:56:17" hostname="admin1-LIVA-Z2V" time="0.513">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-03-04T07:38:41" hostname="admin1-LIVA-Z2V" time="0.643">
   <properties/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.401"/>
-  <testcase name="givenIndianStateCSV_ShouldReturnExactCount" classname="censusanalyser.CensusAnalyserTest" time="0.091"/>
-  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.02"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.373"/>
+  <testcase name="givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult" classname="censusanalyser.CensusAnalyserTest" time="0.182"/>
+  <testcase name="givenIndianStateCSV_ShouldReturnExactCount" classname="censusanalyser.CensusAnalyserTest" time="0.077"/>
+  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

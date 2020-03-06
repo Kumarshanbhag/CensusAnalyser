@@ -2,10 +2,6 @@ package censusanalyser;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -17,35 +13,15 @@ public class CensusAnalyser {
     List<CensusDTO> censusList = null ;
     Map<String, CensusDTO> censusMap = null;
 
-    public int loadIndiaCensusData(String csvFilePath) {
-
-        censusMap = new CensusLoader().loadCensusData(csvFilePath, IndiaCensusCSV.class);
+    public int loadIndiaCensusData(String... csvFilePath) {
+        censusMap = new CensusLoader().loadCensusData(IndiaCensusCSV.class, csvFilePath);
         censusList = censusMap.values().stream().collect(Collectors.toList());
         return censusMap.size();
     }
 
-    public int loadUSCensusData(String csvFilePath) {
-
-        censusMap = new CensusLoader().loadCensusData(csvFilePath, USCensusCSV.class);
+    public int loadUSCensusData(String... csvFilePath) {
+        censusMap = new CensusLoader().loadCensusData(USCensusCSV.class, csvFilePath);
         return censusMap.size();
-    }
-
-    public int loadIndiaStateCode(String csvFilePath) {
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
-            ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IndiaStateCodeCSV> stateCSVFileIterator = csvBuilder.getCSVFileIterator(reader, IndiaStateCodeCSV.class);
-            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVFileIterator;
-            StreamSupport.stream(csvIterable.spliterator(),false)
-                    .filter(csvState -> censusMap.get(csvState.stateCode) != null)
-                    .forEach(csvState -> censusMap.get(csvState.stateCode).stateCode = csvState.stateCode);
-            return censusMap.size();
-
-        } catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }  catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(), e.type.name());
-        }
     }
 
     private <E> int getCount(Iterator<E> iterator) {
@@ -77,6 +53,4 @@ public class CensusAnalyser {
         }
 
     }
-
-
 }
